@@ -301,36 +301,31 @@ textarea{
   margin-top:12px;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.full{grid-column:1/-1}
-
-.preview-wrap{
+.success,
+.error{
   display:none;
-  margin-top:10px;
-}
-
-.preview-wrap img{
-  width:160px;
-  height:160px;
-  object-fit:contain;
-  background:#05070d;
-  border-radius:22px;
-  border:1px solid var(--line);
+  margin-top:14px;
+  padding:14px;
+  border-radius:16px;
+  font-weight:900;
 }
 
 .success{
-  display:none;
-  margin-top:14px;
   background:rgba(34,197,94,.14);
   color:#bbf7d0;
   border:1px solid rgba(34,197,94,.28);
-  padding:14px;
-  border-radius:16px;
+}
+
+.error{
+  background:rgba(239,68,68,.14);
+  color:#fecaca;
+  border:1px solid rgba(239,68,68,.28);
+}
+
+.loading{
+  display:none;
+  color:#dbeafe;
+  margin-top:12px;
   font-weight:900;
 }
 
@@ -354,15 +349,11 @@ footer{
   .hero,
   .submit-panel,
   .stats,
-  .directory,
-  .form-grid{
+  .directory{
     grid-template-columns:1fr;
   }
 
-  .full{grid-column:auto}
-
   h1{letter-spacing:-2px}
-
   .empty{padding:36px 22px}
 }
 </style>
@@ -381,13 +372,13 @@ footer{
 
 <section class="hero">
   <div>
-    <div class="badge">New podcast discovery site launching soon</div>
+    <div class="badge">RSS-powered podcast discovery</div>
     <h1>Find a podcast that doesn’t suck.</h1>
     <p>
-      A searchable podcast directory built for listeners who want something new,
-      and podcasters who want to be found without begging an algorithm.
+      Podcasters submit one RSS feed. The site pulls the show title, artwork,
+      description, website, and latest episode automatically.
     </p>
-    <a class="btn" href="#submit">Submit Your Podcast</a>
+    <a class="btn" href="#submit">Submit Your RSS Feed</a>
     <a class="btn ghost" href="#browse">Browse Directory</a>
 
     <div class="stats">
@@ -396,12 +387,12 @@ footer{
         <span>Podcasts listed</span>
       </div>
       <div class="stat">
-        <strong>Free</strong>
-        <span>To submit</span>
+        <strong>1</strong>
+        <span>Field to submit</span>
       </div>
       <div class="stat">
-        <strong>New</strong>
-        <span>Built for discovery</span>
+        <strong>Auto</strong>
+        <span>Pulls podcast art</span>
       </div>
     </div>
   </div>
@@ -419,6 +410,7 @@ footer{
       <label>Category</label>
       <select id="categoryBox">
         <option value="">All Categories</option>
+        <option>Podcast</option>
         <option>Comedy</option>
         <option>History</option>
         <option>True Crime</option>
@@ -451,70 +443,26 @@ footer{
     <div>
       <h2>Submit your podcast.</h2>
       <p>
-        Add your podcast and instantly create a listing with your podcast artwork.
+        Paste your RSS feed. The directory will automatically pull your podcast name,
+        artwork, description, website link, and latest episode.
       </p>
       <p>
-        This demo saves listings in your browser. The real version would connect to a database.
+        This demo uses a public CORS proxy so it works in a single HTML file. A real site
+        should use your own backend.
       </p>
     </div>
 
     <form id="podcastForm">
-      <div class="form-grid">
-        <div class="field">
-          <label>Podcast Name *</label>
-          <input id="name" required placeholder="Example: The Stupid History Minute">
-        </div>
-
-        <div class="field">
-          <label>Category *</label>
-          <select id="category" required>
-            <option value="">Choose Category</option>
-            <option>Comedy</option>
-            <option>History</option>
-            <option>True Crime</option>
-            <option>Travel</option>
-            <option>Movies & TV</option>
-            <option>Sports</option>
-            <option>Business</option>
-            <option>Health & Wellness</option>
-            <option>Music</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Website / Listen Link</label>
-          <input id="link" placeholder="https://">
-        </div>
-
-        <div class="field">
-          <label>RSS Feed</label>
-          <input id="rss" placeholder="https://">
-        </div>
-
-        <div class="field full">
-          <label>Podcast Artwork</label>
-          <input id="artUpload" type="file" accept="image/*">
-          <div class="preview-wrap" id="previewWrap">
-            <img id="artPreview" alt="Podcast art preview">
-          </div>
-        </div>
-
-        <div class="field full">
-          <label>Description *</label>
-          <textarea id="description" required placeholder="What is the podcast about? Who should listen?"></textarea>
-        </div>
-
-        <div class="field full">
-          <label>Contact Email</label>
-          <input id="email" type="email" placeholder="host@example.com">
-        </div>
-
-        <div class="field full">
-          <button class="btn" type="submit">Create Listing</button>
-          <div class="success" id="success">Podcast added.</div>
-        </div>
+      <div class="field">
+        <label>Podcast RSS Feed *</label>
+        <input id="rssFeed" required placeholder="https://example.com/podcast/rss">
       </div>
+
+      <button class="btn" type="submit">Pull Podcast From RSS</button>
+
+      <div class="loading" id="loading">Reading RSS feed...</div>
+      <div class="success" id="success">Podcast added.</div>
+      <div class="error" id="error">Something went wrong.</div>
     </form>
   </div>
 </section>
@@ -525,7 +473,6 @@ footer{
 
 <script>
 let podcasts = JSON.parse(localStorage.getItem("podcasts")) || [];
-let uploadedArtwork = "";
 
 const form = document.getElementById("podcastForm");
 const list = document.getElementById("podcastList");
@@ -534,12 +481,29 @@ const categoryBox = document.getElementById("categoryBox");
 const countText = document.getElementById("countText");
 const statShows = document.getElementById("statShows");
 const success = document.getElementById("success");
-const artUpload = document.getElementById("artUpload");
-const artPreview = document.getElementById("artPreview");
-const previewWrap = document.getElementById("previewWrap");
+const errorBox = document.getElementById("error");
+const loading = document.getElementById("loading");
 
 function save(){
   localStorage.setItem("podcasts", JSON.stringify(podcasts));
+}
+
+function safe(text){
+  return String(text || "").replace(/[&<>"']/g, function(match){
+    return {
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[match];
+  });
+}
+
+function cleanDescription(text){
+  const div = document.createElement("div");
+  div.innerHTML = text || "";
+  return div.textContent || div.innerText || "";
 }
 
 function getInitials(name){
@@ -552,37 +516,107 @@ function getInitials(name){
     .toUpperCase();
 }
 
-function safe(text){
-  return String(text).replace(/[&<>"']/g, function(match){
-    return {
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[match];
-  });
+function getTagText(xml, tagName){
+  const tag = xml.querySelector(tagName);
+  return tag ? tag.textContent.trim() : "";
 }
 
-artUpload.addEventListener("change", function(){
-  const file = artUpload.files[0];
+function getItunesText(xml, tagName){
+  const tags = xml.getElementsByTagName(tagName);
+  return tags.length ? tags[0].textContent.trim() : "";
+}
 
-  if(!file){
-    uploadedArtwork = "";
-    previewWrap.style.display = "none";
-    return;
+function getItunesImage(xml){
+  const images = xml.getElementsByTagName("itunes:image");
+  if(images.length && images[0].getAttribute("href")){
+    return images[0].getAttribute("href");
   }
 
-  const reader = new FileReader();
+  const normalImage = xml.querySelector("channel > image > url");
+  if(normalImage){
+    return normalImage.textContent.trim();
+  }
 
-  reader.onload = function(event){
-    uploadedArtwork = event.target.result;
-    artPreview.src = uploadedArtwork;
-    previewWrap.style.display = "block";
+  return "";
+}
+
+function getLatestEpisode(xml){
+  const item = xml.querySelector("item");
+  if(!item) return "";
+
+  const title = item.querySelector("title");
+  return title ? title.textContent.trim() : "";
+}
+
+function getWebsite(xml){
+  const channelLink = xml.querySelector("channel > link");
+  return channelLink ? channelLink.textContent.trim() : "";
+}
+
+function getCategory(xml){
+  const itunesCategories = xml.getElementsByTagName("itunes:category");
+
+  if(itunesCategories.length){
+    const first = itunesCategories[0].getAttribute("text");
+    if(first) return first;
+  }
+
+  const category = xml.querySelector("channel > category");
+  if(category){
+    return category.textContent.trim();
+  }
+
+  return "Podcast";
+}
+
+async function fetchRSS(url){
+  const proxyURL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+  const response = await fetch(proxyURL);
+
+  if(!response.ok){
+    throw new Error("Could not fetch RSS feed.");
+  }
+
+  const text = await response.text();
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(text, "text/xml");
+
+  const parserError = xml.querySelector("parsererror");
+  if(parserError){
+    throw new Error("Invalid RSS feed.");
+  }
+
+  return xml;
+}
+
+function parsePodcast(xml, rssURL){
+  const title =
+    getTagText(xml, "channel > title") ||
+    getItunesText(xml, "title") ||
+    "Untitled Podcast";
+
+  const description =
+    cleanDescription(
+      getItunesText(xml, "itunes:summary") ||
+      getTagText(xml, "channel > description")
+    );
+
+  const artwork = getItunesImage(xml);
+  const website = getWebsite(xml);
+  const category = getCategory(xml);
+  const latestEpisode = getLatestEpisode(xml);
+
+  return {
+    name: title,
+    category: category,
+    description: description || "No description found in RSS feed.",
+    artwork: artwork,
+    link: website,
+    rss: rssURL,
+    latestEpisode: latestEpisode,
+    dateAdded: new Date().toISOString()
   };
-
-  reader.readAsDataURL(file);
-});
+}
 
 function showPodcasts(){
   const search = searchBox.value.toLowerCase();
@@ -591,7 +625,7 @@ function showPodcasts(){
   list.innerHTML = "";
 
   const filtered = podcasts.filter(podcast => {
-    const text = `${podcast.name} ${podcast.description} ${podcast.category}`.toLowerCase();
+    const text = `${podcast.name} ${podcast.description} ${podcast.category} ${podcast.latestEpisode}`.toLowerCase();
     const matchesSearch = text.includes(search);
     const matchesCategory = category === "" || podcast.category === category;
     return matchesSearch && matchesCategory;
@@ -607,9 +641,10 @@ function showPodcasts(){
         <div class="empty-icon">🎙️</div>
         <h3>No podcasts listed yet.</h3>
         <p>
-          This is the clean launch state. The first podcasters to submit get early visibility.
+          Paste an RSS feed below and the first podcast will appear here automatically
+          with its real podcast artwork.
         </p>
-        <a class="btn" href="#submit">Submit the First Podcast</a>
+        <a class="btn" href="#submit">Submit the First RSS Feed</a>
       </div>
     `;
     return;
@@ -633,7 +668,7 @@ function showPodcasts(){
     card.className = "card";
 
     const artHTML = podcast.artwork
-      ? `<div class="art"><img src="${podcast.artwork}" alt="${safe(podcast.name)} podcast artwork"></div>`
+      ? `<div class="art"><img src="${safe(podcast.artwork)}" alt="${safe(podcast.name)} artwork"></div>`
       : `<div class="art"><div class="art-fallback">${safe(getInitials(podcast.name))}</div></div>`;
 
     card.innerHTML = `
@@ -641,7 +676,8 @@ function showPodcasts(){
       <div class="card-body">
         <span class="tag">${safe(podcast.category)}</span>
         <h3>${safe(podcast.name)}</h3>
-        <p>${safe(podcast.description)}</p>
+        <p>${safe(podcast.description.substring(0, 190))}${podcast.description.length > 190 ? "..." : ""}</p>
+        ${podcast.latestEpisode ? `<p><strong>Latest:</strong> ${safe(podcast.latestEpisode)}</p>` : ""}
         ${podcast.link ? `<a class="btn ghost" href="${safe(podcast.link)}" target="_blank">Visit Podcast</a>` : ""}
       </div>
     `;
@@ -650,38 +686,43 @@ function showPodcasts(){
   });
 }
 
-form.addEventListener("submit", function(e){
+form.addEventListener("submit", async function(e){
   e.preventDefault();
 
-  const podcast = {
-    name: document.getElementById("name").value.trim(),
-    category: document.getElementById("category").value,
-    link: document.getElementById("link").value.trim(),
-    rss: document.getElementById("rss").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    description: document.getElementById("description").value.trim(),
-    artwork: uploadedArtwork
-  };
+  success.style.display = "none";
+  errorBox.style.display = "none";
+  loading.style.display = "block";
 
-  if(!podcast.name || !podcast.category || !podcast.description){
-    alert("Podcast name, category, and description are required.");
-    return;
+  const rssURL = document.getElementById("rssFeed").value.trim();
+
+  try{
+    const alreadyExists = podcasts.some(podcast => podcast.rss === rssURL);
+
+    if(alreadyExists){
+      throw new Error("That podcast is already listed.");
+    }
+
+    const xml = await fetchRSS(rssURL);
+    const podcast = parsePodcast(xml, rssURL);
+
+    podcasts.unshift(podcast);
+    save();
+
+    form.reset();
+
+    success.textContent = `"${podcast.name}" has been added.`;
+    success.style.display = "block";
+
+    showPodcasts();
+    document.getElementById("browse").scrollIntoView({behavior:"smooth"});
   }
-
-  podcasts.unshift(podcast);
-  save();
-
-  form.reset();
-  uploadedArtwork = "";
-  artPreview.src = "";
-  previewWrap.style.display = "none";
-
-  success.textContent = `"${podcast.name}" has been added.`;
-  success.style.display = "block";
-
-  showPodcasts();
-
-  document.getElementById("browse").scrollIntoView({behavior:"smooth"});
+  catch(error){
+    errorBox.textContent = error.message || "Could not read that RSS feed.";
+    errorBox.style.display = "block";
+  }
+  finally{
+    loading.style.display = "none";
+  }
 });
 
 searchBox.addEventListener("input", showPodcasts);
@@ -691,6 +732,7 @@ function clearPodcasts(){
   localStorage.removeItem("podcasts");
   podcasts = [];
   success.style.display = "none";
+  errorBox.style.display = "none";
   showPodcasts();
 }
 
