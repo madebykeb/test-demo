@@ -1,99 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Summit Shield Roofing | Premium Roofing Contractor</title>
-<meta name="description" content="Premium roofing contractor website for roof replacement, roof repair, storm damage, and inspections.">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Ultimate Podcast Directory</title>
+
+<style>
+:root{
+  --bg:#080b12;
+  --panel:#101521;
+  --panel2:#151c2b;
+  --text:#f8fafc;
+  --muted:#9aa4b2;
+  --line:rgba(255,255,255,.10);
+  --brand:#8b5cf6;
+  --brand2:#06b6d4;
+  --hot:#f59e0b;
+  --green:#22c55e;
+  --shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(139,92,246,.35), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(6,182,212,.25), transparent 30%),
+    var(--bg);
+  color:var(--text);
+}
+
+a{color:inherit}
+
+header{
+  padding:22px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:-.7px;
+}
+
+.logo span{
+  color:var(--brand2);
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--muted);
+  margin-left:24px;
+  font-weight:800;
+  font-size:14px;
+}
+
+.btn{
+  display:inline-block;
+  border:none;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  color:white;
+  padding:14px 22px;
+  border-radius:999px;
+  font-weight:950;
+  text-decoration:none;
+  cursor:pointer;
+  box-shadow:0 15px 35px rgba(6,182,212,.18);
+}
+
+.btn.ghost{
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+.hero{
+  padding:70px 7% 45px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:42px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid var(--line);
+  padding:9px 13px;
+  border-radius:999px;
+  color:#dbeafe;
+  font-weight:900;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:clamp(48px,7vw,86px);
+  line-height:.92;
+  letter-spacing:-4px;
+  margin-bottom:22px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:21px;
+  line-height:1.55;
+  max-width:680px;
+  margin-bottom:28px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.search-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.045));
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:26px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+}
+
+.search-card h2{
+  font-size:30px;
+  letter-spacing:-1px;
+  margin-bottom:8px;
+}
+
+.search-card p{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+label{
+  display:block;
+  color:#dbeafe;
+  font-size:13px;
+  font-weight:950;
+  margin-bottom:8px;
+}
+
+input,select,textarea{
+  width:100%;
+  background:#0b1019;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:rgba(6,182,212,.75);
+}
+
+.section{
+  padding:48px 7%;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:24px;
+}
+
+.section h2{
+  font-size:44px;
+  letter-spacing:-2px;
+}
+
+.sub{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:17px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:26px;
+}
+
+.stat{
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);
+  padding:20px;
+  border-radius:22px;
+}
+
+.stat strong{
+  display:block;
+  font-size:28px;
+}
+
+.stat span{
+  color:var(--muted);
+  font-weight:700;
+}
+
+.directory{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.empty{
+  grid-column:1/-1;
+  background:
+    linear-gradient(135deg,rgba(139,92,246,.13),rgba(6,182,212,.09)),
+    rgba(255,255,255,.045);
+  border:1px dashed rgba(255,255,255,.24);
+  border-radius:34px;
+  padding:60px;
+  text-align:center;
+}
+
+.empty-icon{
+  width:86px;
+  height:86px;
+  margin:0 auto 22px;
+  border-radius:28px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  font-size:38px;
+  box-shadow:0 20px 45px rgba(6,182,212,.18);
+}
+
+.empty h3{
+  font-size:36px;
+  letter-spacing:-1px;
+  margin-bottom:12px;
+}
+
+.empty p{
+  color:var(--muted);
+  max-width:650px;
+  margin:0 auto 24px;
+  font-size:18px;
+  line-height:1.6;
+}
+
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.04));
+  border:1px solid var(--line);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.28);
+}
+
+.art{
+  height:180px;
+  display:grid;
+  place-items:center;
+  font-size:54px;
+  font-weight:950;
+  letter-spacing:-2px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.28), transparent 25%),
+    linear-gradient(135deg,var(--brand),var(--brand2));
+}
+
+.card-body{
+  padding:22px;
+}
+
+.tag{
+  display:inline-block;
+  color:#cffafe;
+  background:rgba(6,182,212,.13);
+  border:1px solid rgba(6,182,212,.25);
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:950;
+  margin-bottom:12px;
+}
+
+.card h3{
+  font-size:24px;
+  letter-spacing:-.8px;
+  margin-bottom:8px;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.5;
+  margin-bottom:16px;
+}
+
+.submit-panel{
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(6,182,212,.11));
+  border:1px solid var(--line);
+  border-radius:36px;
+  padding:34px;
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:34px;
+  box-shadow:var(--shadow);
+}
+
+.submit-panel h2{
+  font-size:46px;
+}
+
+.submit-panel p{
+  color:var(--muted);
+  line-height:1.6;
+  margin-top:12px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.full{grid-column:1/-1}
+
+textarea{
+  min-height:115px;
+  resize:vertical;
+}
+
+.success{
+  display:none;
+  margin-top:14px;
+  background:rgba(34,197,94,.12);
+  color:#bbf7d0;
+  border:1px solid rgba(34,197,94,.28);
+  padding:14px;
+  border-radius:16px;
+  font-weight:900;
+}
+
+footer{
+  padding:40px 7%;
+  color:var(--muted);
+  text-align:center;
+}
+
+@media(max-width:900px){
+  header,.section-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  nav a{
+    margin:10px 14px 0 0;
+    display:inline-block;
+  }
+
+  .hero,.submit-panel{
+    grid-template-columns:1fr;
+  }
+
+  .directory,.stats,.form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{grid-column:auto}
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .empty{
+    padding:36px 22px;
+  }
+}
+</style>
 </head>
+
 <body>
-<div class="topbar">
-  <div>Licensed • Insured • Local Roofing Specialists</div>
-  <div>Emergency Storm Help: <strong>904-555-ROOF</strong></div>
-</div>
-<header class="header">
-  <a class="logo" href="index.html"><span class="mark">S</span><span>Summit</span> <span>Shield</span></a>
-  <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="gallery.html">Projects</a>
-    <a href="contact.html">Contact</a>
-    <a href="contact.html" class="btn">Free Roof Inspection</a>
+
+<header>
+  <div class="logo">Ultimate<span>Podcast</span>Directory</div>
+  <nav>
+    <a href="#browse">Browse</a>
+    <a href="#submit">Submit</a>
+    <a href="#about">About</a>
+    <a class="btn ghost" href="#submit">Add Your Show</a>
   </nav>
-  <div class="mobile">☰</div>
 </header>
+
 <section class="hero">
-  <div class="hero-inner">
-    <div class="kicker">Premium Roofing • Built To Outlast The Storm</div>
-    <h1>Roofing That Looks Expensive Because Cutting Corners Isn’t The Brand.</h1>
-    <p class="lead">Roof replacement, roof repair, inspections, and storm damage help with clean crews, sharp communication, and a finished roof that makes the neighbors suddenly “need a walk.”</p>
-    <div class="hero-actions">
-      <a class="btn" href="contact.html">Book My Free Inspection</a>
-      <a class="btn ghost" href="gallery.html">See Recent Projects</a>
-    </div>
-    <div class="hero-proof">
-      <div class="proof-card"><strong>25+</strong><span>Years of roofing experience</span></div>
-      <div class="proof-card"><strong>4.9★</strong><span>Homeowner satisfaction rating</span></div>
-      <div class="proof-card"><strong>24/7</strong><span>Storm response availability</span></div>
-    </div>
-  </div>
-</section>
-
-<div class="stat-band">
-  <div class="stat"><strong>1,800+</strong><span>Roofs Protected</span></div>
-  <div class="stat"><strong>0</strong><span>High-Pressure Sales Games</span></div>
-  <div class="stat"><strong>100%</strong><span>Photo-Documented Inspections</span></div>
-  <div class="stat"><strong>5-Star</strong><span>Local Reputation</span></div>
-</div>
-
-<section class="light-section">
-  <div class="center">
-    <div class="kicker">The Difference</div>
-    <h2>This Is What A Roofing Company Should Feel Like.</h2>
-    <p>Most roofing websites say the same thing. We built this one around what homeowners actually care about: trust, speed, proof, cleanup, warranty, and not being treated like a walking insurance claim.</p>
-  </div>
-  <div class="grid-3">
-    <div class="card"><div class="icon">01</div><h3>Clear Diagnosis</h3><p>You get photos, explanations, and options. Not vague roof-guy poetry.</p></div>
-    <div class="card"><div class="icon">02</div><h3>Premium Install</h3><p>Roofing systems installed with proper ventilation, flashing, underlayment, and details that matter.</p></div>
-    <div class="card"><div class="icon">03</div><h3>Clean Finish</h3><p>We protect your property, run magnets, clean up, and leave the place looking like professionals were there.</p></div>
-  </div>
-</section>
-
-<section>
-  <div class="grid-2">
-    <div>
-      <div class="kicker">Built For Florida Weather</div>
-      <h2>When The Sky Starts Acting Stupid, Your Roof Better Not Join In.</h2>
-      <p class="lead">A roofing system is more than shingles. It is ventilation, flashing, decking, underlayment, fasteners, installation, and the kind of details people only notice when they were done wrong.</p>
-      <div class="list">
-        <div>Full roof replacement and tear-offs</div>
-        <div>Leak detection and roof repairs</div>
-        <div>Storm damage inspections</div>
-        <div>Insurance documentation support</div>
-      </div>
-      <a class="btn" href="services.html">Explore Roofing Services</a>
-    </div>
-    <div class="split-photo photo-roof"></div>
-  </div>
-</section>
-
-<section class="light-section">
-  <div class="cta-panel">
-    <div class="kicker">Free Inspection</div>
-    <h2>Not Sure If You Need A Repair Or A Replacement?</h2>
-    <p class="lead">Good. That means you are normal. Let us look first, explain what we see, and give you a straight answer.</p>
-    <a class="btn dark" href="contact.html">Schedule My Inspection</a>
-  </div>
-</section>
-<footer class="footer">
   <div>
-    <a class="logo" href="index.html"><span class="mark">S</span><span>Summit</span> <span>Shield</span></a>
-    <br><br>
-    <p>High-end roofing, storm damage help, and roof replacement services for homeowners who want the job done right the first time.</p>
+    <div class="badge">🎧 New podcast discovery site launching soon</div>
+    <h1>Find a podcast that doesn’t suck.</h1>
+    <p>
+      A searchable podcast directory built for listeners who want something new,
+      and podcasters who want to be found without begging an algorithm.
+    </p>
+    <div class="hero-actions">
+      <a class="btn" href="#submit">Submit Your Podcast</a>
+      <a class="btn ghost" href="#browse">Browse Directory</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="statShows">0</strong>
+        <span>Podcasts listed</span>
+      </div>
+      <div class="stat">
+        <strong>Free</strong>
+        <span>To submit</span>
+      </div>
+      <div class="stat">
+        <strong>New</strong>
+        <span>Built for discovery</span>
+      </div>
+    </div>
   </div>
-  <div><h3>Company</h3><p><a href="about.html">About</a></p><p><a href="gallery.html">Projects</a></p><p><a href="contact.html">Contact</a></p></div>
-  <div><h3>Services</h3><p><a href="services.html">Roof Replacement</a></p><p><a href="services.html">Roof Repair</a></p><p><a href="services.html">Storm Damage</a></p></div>
-  <div><h3>Contact</h3><p>904-555-ROOF</p><p>info@summitshieldroofing.com</p><p>Jacksonville, FL</p></div>
-</footer></body></html>
+
+  <div class="search-card">
+    <h2>Search the directory</h2>
+    <p>No shows have signed up yet. That means the first listings get the spotlight.</p>
+
+    <div class="field">
+      <label>Search</label>
+      <input id="searchBox" placeholder="Search by name, topic, or description">
+    </div>
+
+    <div class="field">
+      <label>Category</label>
+      <select id="categoryBox">
+        <option value="">All Categories</option>
+        <option>Comedy</option>
+        <option>History</option>
+        <option>True Crime</option>
+        <option>Travel</option>
+        <option>Movies & TV</option>
+        <option>Sports</option>
+        <option>Business</option>
+        <option>Health & Wellness</option>
+        <option>Music</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <button class="btn" onclick="showPodcasts()">Search Podcasts</button>
+  </div>
+</section>
+
+<section class="section" id="browse">
+  <div class="section-head">
+    <div>
+      <h2>Browse Podcasts</h2>
+      <p class="sub" id="countText">No podcasts have been submitted yet.</p>
+    </div>
+    <button class="btn ghost" onclick="clearPodcasts()">Reset Demo</button>
+  </div>
+
+  <div class="directory" id="podcastList"></div>
+</section>
+
+<section class="section" id="submit">
+  <div class="submit-panel">
+    <div>
+      <h2>Submit your podcast.</h2>
+      <p>
+        Add your podcast and instantly create a listing. This demo saves in your browser.
+      </p>
+      <p>
+        The real version would connect this form to a database, approval queue, and public listing pages.
+      </p>
+    </div>
+
+    <form id="podcastForm">
+      <div class="form-grid">
+        <div class="field">
+          <label>Podcast Name *</label>
+          <input id="name" required placeholder="Example: The Stupid History Minute">
+        </div>
+
+        <div class="field">
+          <label>Category *</label>
+          <select id="category" required>
+            <option value="">Choose Category</option>
+            <option>Comedy</option>
+            <option>History</option>
+            <option>True Crime</option>
+            <option>Travel</option>
+            <option>Movies & TV</option>
+            <option>Sports</option>
+            <option>Business</option>
+            <option>Health & Wellness</option>
+            <option>Music</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Website / Listen Link</label>
+          <input id="link" placeholder="https://">
+        </div>
+
+        <div class="field">
+          <label>RSS Feed</label>
+          <input id="rss" placeholder="https://">
+        </div>
+
+        <div class="field full">
+          <label>Description *</label>
+          <textarea id="description" required placeholder="What is the podcast about? Who should listen?"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Contact Email</label>
+          <input id="email" type="email" placeholder="host@example.com">
+        </div>
+
+        <div class="field full">
+          <button class="btn" type="submit">Create Listing</button>
+          <div class="success" id="success">Podcast added.</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer id="about">
+  The Ultimate Podcast Directory — a better way to find shows worth listening to.
+</footer>
+
+<script>
+let podcasts = JSON.parse(localStorage.getItem("podcasts")) || [];
+
+const form = document.getElementById("podcastForm");
+const list = document.getElementById("podcastList");
+const searchBox = document.getElementById("searchBox");
+const categoryBox = document.getElementById("categoryBox");
+const countText = document.getElementById("countText");
+const statShows = document.getElementById("statShows");
+const success = document.getElementById("success");
+
+function save(){
+  localStorage.setItem("podcasts", JSON.stringify(podcasts));
+}
+
+function getInitials(name){
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .map(word => word[0])
+    .join("")
+    .substring(0,2)
+    .toUpperCase();
+}
+
+function safe(text){
+  return String(text).replace(/[&<>"']/g, function(match){
+    return {
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[match];
+  });
+}
+
+function showPodcasts(){
+  const search = searchBox.value.toLowerCase();
+  const category = categoryBox.value;
+
+  list.innerHTML = "";
+
+  const filtered = podcasts.filter(podcast => {
+    const text = `${podcast.name} ${podcast.description} ${podcast.category}`.toLowerCase();
+    const matchesSearch = text.includes(search);
+    const matchesCategory = category === "" || podcast.category === category;
+    return matchesSearch && matchesCategory;
+  });
+
+  statShows.textContent = podcasts.length;
+
+  if(podcasts.length === 0){
+    countText.textContent = "No podcasts have been submitted yet.";
+
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🎙️</div>
+        <h3>No podcasts listed yet.</h3>
+        <p>
+          This is the clean launch state. It tells podcasters exactly what to do:
+          submit the first show and get early visibility.
+        </p>
+        <a class="btn" href="#submit">Submit the First Podcast</a>
+      </div>
+    `;
+    return;
+  }
+
+  countText.textContent = `${filtered.length} podcast${filtered.length === 1 ? "" : "s"} showing.`;
+
+  if(filtered.length === 0){
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🔎</div>
+        <h3>No matches found.</h3>
+        <p>Try a different keyword or category.</p>
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach(podcast => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="art">${safe(getInitials(podcast.name))}</div>
+      <div class="card-body">
+        <span class="tag">${safe(podcast.category)}</span>
+        <h3>${safe(podcast.name)}</h3>
+        <p>${safe(podcast.description)}</p>
+        ${podcast.link ? `<a class="btn ghost" href="${safe(podcast.link)}" target="_blank">Visit Podcast</a>` : ""}
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+}
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const podcast = {
+    name: document.getElementById("name").value.trim(),
+    category: document.getElementById("category").value,
+    link: document.getElementById("link").value.trim(),
+    rss: document.getElementById("rss").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    description: document.getElementById("description").value.trim()
+  };
+
+  if(!podcast.name || !podcast.category || !podcast.description){
+    alert("Podcast name, category, and description are required.");
+    return;
+  }
+
+  podcasts.unshift(podcast);
+  save();
+
+  form.reset();
+  success.textContent = `"${podcast.name}" has been added.`;
+  success.style.display = "block";
+
+  showPodcasts();
+
+  document.getElementById("browse").scrollIntoView({behavior:"smooth"});
+});
+
+searchBox.addEventListener("input", showPodcasts);
+categoryBox.addEventListener("change", showPodcasts);
+
+function clearPodcasts(){
+  localStorage.removeItem("podcasts");
+  podcasts = [];
+  success.style.display = "none";
+  showPodcasts();
+}
+
+showPodcasts();
+</script>
+
+</body>
+</html>
