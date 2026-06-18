@@ -1,106 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Ultimate Podcast Directory</title>
-
 <style>
 :root{
   --bg:#080b12;
   --panel:#101521;
-  --panel2:#151c2b;
   --text:#f8fafc;
   --muted:#9aa4b2;
-  --line:rgba(255,255,255,.10);
+  --line:rgba(255,255,255,.12);
   --brand:#8b5cf6;
   --brand2:#06b6d4;
-  --hot:#f59e0b;
   --green:#22c55e;
-  --shadow:0 30px 90px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:Inter,Arial,sans-serif;
+  font-family:Arial,sans-serif;
   background:
-    radial-gradient(circle at 20% 0%, rgba(139,92,246,.35), transparent 35%),
-    radial-gradient(circle at 80% 10%, rgba(6,182,212,.25), transparent 30%),
+    radial-gradient(circle at top left, rgba(139,92,246,.35), transparent 35%),
+    radial-gradient(circle at top right, rgba(6,182,212,.25), transparent 30%),
     var(--bg);
   color:var(--text);
 }
 
-a{color:inherit}
-
 header{
-  padding:22px 7%;
+  padding:24px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
 .logo{
-  font-size:22px;
-  font-weight:950;
-  letter-spacing:-.7px;
+  font-size:24px;
+  font-weight:900;
 }
 
-.logo span{
-  color:var(--brand2);
-}
+.logo span{color:var(--brand2)}
 
 nav a{
-  text-decoration:none;
   color:var(--muted);
+  text-decoration:none;
   margin-left:24px;
   font-weight:800;
-  font-size:14px;
 }
 
 .btn{
   display:inline-block;
-  border:none;
+  border:0;
   background:linear-gradient(135deg,var(--brand),var(--brand2));
   color:white;
   padding:14px 22px;
   border-radius:999px;
-  font-weight:950;
+  font-weight:900;
   text-decoration:none;
   cursor:pointer;
-  box-shadow:0 15px 35px rgba(6,182,212,.18);
 }
 
 .btn.ghost{
-  background:rgba(255,255,255,.07);
+  background:rgba(255,255,255,.08);
   border:1px solid var(--line);
-  box-shadow:none;
 }
 
 .hero{
-  padding:70px 7% 45px;
+  padding:70px 7%;
   display:grid;
   grid-template-columns:1.1fr .9fr;
-  gap:42px;
+  gap:40px;
   align-items:center;
 }
 
 .badge{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
+  display:inline-block;
   background:rgba(255,255,255,.08);
   border:1px solid var(--line);
-  padding:9px 13px;
+  padding:9px 14px;
   border-radius:999px;
   color:#dbeafe;
   font-weight:900;
-  font-size:13px;
   margin-bottom:20px;
 }
 
 h1{
-  font-size:clamp(48px,7vw,86px);
+  font-size:clamp(48px,7vw,84px);
   line-height:.92;
   letter-spacing:-4px;
   margin-bottom:22px;
@@ -109,47 +94,39 @@ h1{
 .hero p{
   color:var(--muted);
   font-size:21px;
-  line-height:1.55;
-  max-width:680px;
+  line-height:1.5;
   margin-bottom:28px;
 }
 
-.hero-actions{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
+.search-card,
+.submit-panel,
+.card,
+.empty{
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);
+  border-radius:30px;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
 }
 
 .search-card{
-  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.045));
-  border:1px solid var(--line);
-  border-radius:34px;
-  padding:26px;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(12px);
+  padding:28px;
 }
 
 .search-card h2{
-  font-size:30px;
-  letter-spacing:-1px;
-  margin-bottom:8px;
-}
-
-.search-card p{
-  color:var(--muted);
-  margin-bottom:20px;
+  font-size:32px;
+  margin-bottom:10px;
 }
 
 .field{
-  margin-bottom:14px;
+  margin-top:15px;
 }
 
 label{
   display:block;
-  color:#dbeafe;
   font-size:13px;
-  font-weight:950;
+  font-weight:900;
   margin-bottom:8px;
+  color:#dbeafe;
 }
 
 input,select,textarea{
@@ -157,18 +134,18 @@ input,select,textarea{
   background:#0b1019;
   color:white;
   border:1px solid var(--line);
-  border-radius:16px;
+  border-radius:15px;
   padding:15px;
   font-size:15px;
-  outline:none;
 }
 
-input:focus,select:focus,textarea:focus{
-  border-color:rgba(6,182,212,.75);
+textarea{
+  min-height:115px;
+  resize:vertical;
 }
 
 .section{
-  padding:48px 7%;
+  padding:45px 7%;
 }
 
 .section-head{
@@ -187,14 +164,13 @@ input:focus,select:focus,textarea:focus{
 .sub{
   color:var(--muted);
   margin-top:8px;
-  font-size:17px;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
-  margin-top:26px;
+  margin-top:28px;
 }
 
 .stat{
@@ -206,7 +182,7 @@ input:focus,select:focus,textarea:focus{
 
 .stat strong{
   display:block;
-  font-size:28px;
+  font-size:30px;
 }
 
 .stat span{
@@ -222,13 +198,9 @@ input:focus,select:focus,textarea:focus{
 
 .empty{
   grid-column:1/-1;
-  background:
-    linear-gradient(135deg,rgba(139,92,246,.13),rgba(6,182,212,.09)),
-    rgba(255,255,255,.045);
-  border:1px dashed rgba(255,255,255,.24);
-  border-radius:34px;
   padding:60px;
   text-align:center;
+  border-style:dashed;
 }
 
 .empty-icon{
@@ -240,12 +212,10 @@ input:focus,select:focus,textarea:focus{
   place-items:center;
   background:linear-gradient(135deg,var(--brand),var(--brand2));
   font-size:38px;
-  box-shadow:0 20px 45px rgba(6,182,212,.18);
 }
 
 .empty h3{
   font-size:36px;
-  letter-spacing:-1px;
   margin-bottom:12px;
 }
 
@@ -258,23 +228,23 @@ input:focus,select:focus,textarea:focus{
 }
 
 .card{
-  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.04));
-  border:1px solid var(--line);
-  border-radius:28px;
   overflow:hidden;
-  box-shadow:0 24px 60px rgba(0,0,0,.28);
 }
 
 .art{
-  height:180px;
+  height:210px;
   display:grid;
   place-items:center;
   font-size:54px;
-  font-weight:950;
-  letter-spacing:-2px;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,.28), transparent 25%),
-    linear-gradient(135deg,var(--brand),var(--brand2));
+  font-weight:900;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+}
+
+.art img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 .card-body{
@@ -289,13 +259,12 @@ input:focus,select:focus,textarea:focus{
   padding:6px 10px;
   border-radius:999px;
   font-size:12px;
-  font-weight:950;
+  font-weight:900;
   margin-bottom:12px;
 }
 
 .card h3{
   font-size:24px;
-  letter-spacing:-.8px;
   margin-bottom:8px;
 }
 
@@ -306,14 +275,10 @@ input:focus,select:focus,textarea:focus{
 }
 
 .submit-panel{
-  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(6,182,212,.11));
-  border:1px solid var(--line);
-  border-radius:36px;
   padding:34px;
   display:grid;
   grid-template-columns:.8fr 1.2fr;
   gap:34px;
-  box-shadow:var(--shadow);
 }
 
 .submit-panel h2{
@@ -334,15 +299,23 @@ input:focus,select:focus,textarea:focus{
 
 .full{grid-column:1/-1}
 
-textarea{
-  min-height:115px;
-  resize:vertical;
+.preview-wrap{
+  display:none;
+  margin-top:10px;
+}
+
+.preview-wrap img{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  border-radius:22px;
+  border:1px solid var(--line);
 }
 
 .success{
   display:none;
   margin-top:14px;
-  background:rgba(34,197,94,.12);
+  background:rgba(34,197,94,.14);
   color:#bbf7d0;
   border:1px solid rgba(34,197,94,.28);
   padding:14px;
@@ -363,27 +336,23 @@ footer{
   }
 
   nav a{
-    margin:10px 14px 0 0;
     display:inline-block;
+    margin:10px 14px 0 0;
   }
 
-  .hero,.submit-panel{
-    grid-template-columns:1fr;
-  }
-
-  .directory,.stats,.form-grid{
+  .hero,
+  .submit-panel,
+  .stats,
+  .directory,
+  .form-grid{
     grid-template-columns:1fr;
   }
 
   .full{grid-column:auto}
 
-  h1{
-    letter-spacing:-2px;
-  }
+  h1{letter-spacing:-2px}
 
-  .empty{
-    padding:36px 22px;
-  }
+  .empty{padding:36px 22px}
 }
 </style>
 </head>
@@ -395,23 +364,20 @@ footer{
   <nav>
     <a href="#browse">Browse</a>
     <a href="#submit">Submit</a>
-    <a href="#about">About</a>
     <a class="btn ghost" href="#submit">Add Your Show</a>
   </nav>
 </header>
 
 <section class="hero">
   <div>
-    <div class="badge">🎧 New podcast discovery site launching soon</div>
+    <div class="badge">New podcast discovery site launching soon</div>
     <h1>Find a podcast that doesn’t suck.</h1>
     <p>
       A searchable podcast directory built for listeners who want something new,
       and podcasters who want to be found without begging an algorithm.
     </p>
-    <div class="hero-actions">
-      <a class="btn" href="#submit">Submit Your Podcast</a>
-      <a class="btn ghost" href="#browse">Browse Directory</a>
-    </div>
+    <a class="btn" href="#submit">Submit Your Podcast</a>
+    <a class="btn ghost" href="#browse">Browse Directory</a>
 
     <div class="stats">
       <div class="stat">
@@ -431,7 +397,7 @@ footer{
 
   <div class="search-card">
     <h2>Search the directory</h2>
-    <p>No shows have signed up yet. That means the first listings get the spotlight.</p>
+    <p class="sub">No shows have signed up yet. The first listings get the spotlight.</p>
 
     <div class="field">
       <label>Search</label>
@@ -454,8 +420,6 @@ footer{
         <option>Other</option>
       </select>
     </div>
-
-    <button class="btn" onclick="showPodcasts()">Search Podcasts</button>
   </div>
 </section>
 
@@ -476,10 +440,10 @@ footer{
     <div>
       <h2>Submit your podcast.</h2>
       <p>
-        Add your podcast and instantly create a listing. This demo saves in your browser.
+        Add your podcast and instantly create a listing with your podcast artwork.
       </p>
       <p>
-        The real version would connect this form to a database, approval queue, and public listing pages.
+        This demo saves listings in your browser. The real version would connect to a database.
       </p>
     </div>
 
@@ -518,6 +482,14 @@ footer{
         </div>
 
         <div class="field full">
+          <label>Podcast Artwork</label>
+          <input id="artUpload" type="file" accept="image/*">
+          <div class="preview-wrap" id="previewWrap">
+            <img id="artPreview" alt="Podcast art preview">
+          </div>
+        </div>
+
+        <div class="field full">
           <label>Description *</label>
           <textarea id="description" required placeholder="What is the podcast about? Who should listen?"></textarea>
         </div>
@@ -536,12 +508,13 @@ footer{
   </div>
 </section>
 
-<footer id="about">
+<footer>
   The Ultimate Podcast Directory — a better way to find shows worth listening to.
 </footer>
 
 <script>
 let podcasts = JSON.parse(localStorage.getItem("podcasts")) || [];
+let uploadedArtwork = "";
 
 const form = document.getElementById("podcastForm");
 const list = document.getElementById("podcastList");
@@ -550,6 +523,9 @@ const categoryBox = document.getElementById("categoryBox");
 const countText = document.getElementById("countText");
 const statShows = document.getElementById("statShows");
 const success = document.getElementById("success");
+const artUpload = document.getElementById("artUpload");
+const artPreview = document.getElementById("artPreview");
+const previewWrap = document.getElementById("previewWrap");
 
 function save(){
   localStorage.setItem("podcasts", JSON.stringify(podcasts));
@@ -577,6 +553,26 @@ function safe(text){
   });
 }
 
+artUpload.addEventListener("change", function(){
+  const file = artUpload.files[0];
+
+  if(!file){
+    uploadedArtwork = "";
+    previewWrap.style.display = "none";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(event){
+    uploadedArtwork = event.target.result;
+    artPreview.src = uploadedArtwork;
+    previewWrap.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
 function showPodcasts(){
   const search = searchBox.value.toLowerCase();
   const category = categoryBox.value;
@@ -600,8 +596,7 @@ function showPodcasts(){
         <div class="empty-icon">🎙️</div>
         <h3>No podcasts listed yet.</h3>
         <p>
-          This is the clean launch state. It tells podcasters exactly what to do:
-          submit the first show and get early visibility.
+          This is the clean launch state. The first podcasters to submit get early visibility.
         </p>
         <a class="btn" href="#submit">Submit the First Podcast</a>
       </div>
@@ -626,8 +621,12 @@ function showPodcasts(){
     const card = document.createElement("div");
     card.className = "card";
 
+    const artHTML = podcast.artwork
+      ? `<div class="art"><img src="${podcast.artwork}" alt="${safe(podcast.name)} podcast artwork"></div>`
+      : `<div class="art">${safe(getInitials(podcast.name))}</div>`;
+
     card.innerHTML = `
-      <div class="art">${safe(getInitials(podcast.name))}</div>
+      ${artHTML}
       <div class="card-body">
         <span class="tag">${safe(podcast.category)}</span>
         <h3>${safe(podcast.name)}</h3>
@@ -649,7 +648,8 @@ form.addEventListener("submit", function(e){
     link: document.getElementById("link").value.trim(),
     rss: document.getElementById("rss").value.trim(),
     email: document.getElementById("email").value.trim(),
-    description: document.getElementById("description").value.trim()
+    description: document.getElementById("description").value.trim(),
+    artwork: uploadedArtwork
   };
 
   if(!podcast.name || !podcast.category || !podcast.description){
@@ -661,6 +661,10 @@ form.addEventListener("submit", function(e){
   save();
 
   form.reset();
+  uploadedArtwork = "";
+  artPreview.src = "";
+  previewWrap.style.display = "none";
+
   success.textContent = `"${podcast.name}" has been added.`;
   success.style.display = "block";
 
