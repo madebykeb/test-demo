@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Ultimate Podcast Directory</title>
+</head>
+<body>
+  <h1>The Ultimate Podcast Directory</h1>
 
+  <form id="form">
+    <input id="rss" placeholder="Paste RSS feed here" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const rssUrl = document.getElementById("rss").value;
+
+      const response = await fetch("/api/rss", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rssUrl })
+      });
+
+      const data = await response.json();
+
+      document.getElementById("result").innerHTML = `
+        <h2>${data.title}</h2>
+        <img src="${data.artwork}" style="width:250px;">
+        <p>${data.description}</p>
+      `;
+    });
+  </script>
+</body>
+</html>
