@@ -18,11 +18,7 @@
       --radius: 22px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -31,9 +27,7 @@
       line-height: 1.6;
     }
 
-    a {
-      text-decoration: none;
-    }
+    a { text-decoration: none; }
 
     header {
       background: rgba(7,24,39,.96);
@@ -54,9 +48,7 @@
       letter-spacing: .5px;
     }
 
-    .brand span {
-      color: var(--gold);
-    }
+    .brand span { color: var(--gold); }
 
     nav a {
       color: white;
@@ -65,9 +57,7 @@
       opacity: .9;
     }
 
-    nav a:hover {
-      color: var(--gold);
-    }
+    nav a:hover { color: var(--gold); }
 
     .hero {
       min-height: 88vh;
@@ -130,9 +120,7 @@
       box-shadow: 0 14px 30px rgba(215,168,79,.25);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-    }
+    .btn-primary:hover { transform: translateY(-2px); }
 
     .btn-outline {
       color: white;
@@ -140,40 +128,37 @@
     }
 
     .hero-card {
-      background: rgba(255,255,255,.96);
-      color: var(--text);
-      padding: 34px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background: #ffffff;
+      color: #1f2937;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.18);
+    }
+
+    .hero-card h4 {
+      color: var(--gold);
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
     }
 
     .hero-card h3 {
-      font-size: 1.6rem;
-      color: var(--navy);
+      color: var(--blue);
+      font-size: 2rem;
       margin-bottom: 16px;
     }
 
-    .hero-card ul {
-      list-style: none;
-      margin: 20px 0;
+    .hero-card p {
+      color: #4b5563;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
     }
 
-    .hero-card li {
-      padding: 12px 0;
-      border-bottom: 1px solid #e5e9ee;
-      font-weight: bold;
-    }
+    .hero-card strong { color: var(--navy); }
 
-    .hero-card li::before {
-      content: "✓";
-      color: var(--gold);
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    section {
-      padding: 82px 7%;
-    }
+    section { padding: 82px 7%; }
 
     .section-head {
       max-width: 760px;
@@ -194,9 +179,7 @@
       font-size: 1.08rem;
     }
 
-    .light {
-      background: var(--steel);
-    }
+    .light { background: var(--steel); }
 
     .grid {
       display: grid;
@@ -218,9 +201,7 @@
       margin-bottom: 12px;
     }
 
-    .card p {
-      color: var(--muted);
-    }
+    .card p { color: var(--muted); }
 
     .split {
       display: grid;
@@ -243,9 +224,7 @@
       margin-bottom: 18px;
     }
 
-    .feature-box p {
-      color: #d5e0e8;
-    }
+    .feature-box p { color: #d5e0e8; }
 
     .stat-row {
       display: grid;
@@ -266,10 +245,7 @@
       font-size: 1.8rem;
     }
 
-    .service-list {
-      display: grid;
-      gap: 18px;
-    }
+    .service-list { display: grid; gap: 18px; }
 
     .service-item {
       background: white;
@@ -384,42 +360,16 @@
     }
 
     @media (max-width: 1050px) {
-      .hero,
-      .split,
-      .contact-wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .grid,
-      .testimonials {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .hero, .split, .contact-wrap { grid-template-columns: 1fr; }
+      .grid, .testimonials { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 700px) {
-      header {
-        display: block;
-        text-align: center;
-      }
-
-      nav {
-        margin-top: 14px;
-      }
-
-      nav a {
-        display: inline-block;
-        margin: 6px 8px;
-      }
-
-      .grid,
-      .testimonials,
-      .stat-row {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 60px;
-      }
+      header { display: block; text-align: center; }
+      nav { margin-top: 14px; }
+      nav a { display: inline-block; margin: 6px 8px; }
+      .grid, .testimonials, .stat-row { grid-template-columns: 1fr; }
+      .hero { padding-top: 60px; }
     }
   </style>
 </head>
@@ -452,15 +402,18 @@
   </div>
 
   <div class="hero-card">
-    <h3>What We Help With</h3>
-    <ul>
-      <li>Small Business Accounting</li>
-      <li>Business & Individual Taxes</li>
-      <li>QuickBooks Setup & Cleanup</li>
-      <li>Business Formation</li>
-      <li>IRS Representation</li>
-    </ul>
-    <p><strong>Alex Blade, EA</strong><br>Federally licensed tax professional authorized to represent taxpayers before the IRS.</p>
+    <h4>Meet Your Tax Professional</h4>
+    <h3>Alex Blade, EA</h3>
+    <p>
+      As an <strong>Enrolled Agent</strong>, Alex is federally licensed by the U.S.
+      Department of the Treasury and is authorized to represent taxpayers before the IRS.
+    </p>
+    <p>
+      From business accounting and tax planning to QuickBooks consulting and IRS issues,
+      The Blade Firm helps Jacksonville business owners spend less time worrying about
+      paperwork and more time growing their businesses.
+    </p>
+    <a href="#contact" class="btn btn-primary">Schedule Your Consultation</a>
   </div>
 </section>
 
@@ -474,25 +427,10 @@
   </div>
 
   <div class="grid">
-    <div class="card">
-      <h3>Small Business Accounting</h3>
-      <p>Bookkeeping, payroll support, financial organization, records cleanup, and practical reporting.</p>
-    </div>
-
-    <div class="card">
-      <h3>Business Taxes</h3>
-      <p>Tax preparation and planning for LLCs, S-Corps, C-Corps, sole proprietors, and partnerships.</p>
-    </div>
-
-    <div class="card">
-      <h3>Individual Taxes</h3>
-      <p>Tax returns for individuals, self-employed professionals, rental property owners, and more.</p>
-    </div>
-
-    <div class="card">
-      <h3>Business Formation</h3>
-      <p>Guidance on choosing the right structure before the paperwork becomes a problem.</p>
-    </div>
+    <div class="card"><h3>Small Business Accounting</h3><p>Bookkeeping, payroll support, financial organization, records cleanup, and practical reporting.</p></div>
+    <div class="card"><h3>Business Taxes</h3><p>Tax preparation and planning for LLCs, S-Corps, C-Corps, sole proprietors, and partnerships.</p></div>
+    <div class="card"><h3>Individual Taxes</h3><p>Tax returns for individuals, self-employed professionals, rental property owners, and more.</p></div>
+    <div class="card"><h3>Business Formation</h3><p>Guidance on choosing the right structure before the paperwork becomes a problem.</p></div>
   </div>
 </section>
 
@@ -506,36 +444,16 @@
       </p>
 
       <div class="stat-row">
-        <div class="stat">
-          <strong>EA</strong>
-          IRS Representation
-        </div>
-        <div class="stat">
-          <strong>QB</strong>
-          QuickBooks Help
-        </div>
-        <div class="stat">
-          <strong>JAX</strong>
-          Local Business Focus
-        </div>
+        <div class="stat"><strong>EA</strong>IRS Representation</div>
+        <div class="stat"><strong>QB</strong>QuickBooks Help</div>
+        <div class="stat"><strong>JAX</strong>Local Business Focus</div>
       </div>
     </div>
 
     <div class="service-list">
-      <div class="service-item">
-        <h3>For business owners who are tired of guessing</h3>
-        <p>The Blade Firm helps turn receipts, reports, payroll, and taxes into something understandable.</p>
-      </div>
-
-      <div class="service-item">
-        <h3>For companies that need real accounting help</h3>
-        <p>Restaurants, contractors, property managers, real estate, retail, technology, marketing, and more.</p>
-      </div>
-
-      <div class="service-item">
-        <h3>For people who want tax season to stop being a disaster</h3>
-        <p>Better records, better planning, and fewer last-minute surprises.</p>
-      </div>
+      <div class="service-item"><h3>For business owners who are tired of guessing</h3><p>The Blade Firm helps turn receipts, reports, payroll, and taxes into something understandable.</p></div>
+      <div class="service-item"><h3>For companies that need real accounting help</h3><p>Restaurants, contractors, property managers, real estate, retail, technology, marketing, and more.</p></div>
+      <div class="service-item"><h3>For people who want tax season to stop being a disaster</h3><p>Better records, better planning, and fewer last-minute surprises.</p></div>
     </div>
   </div>
 </section>
@@ -550,25 +468,10 @@
   </div>
 
   <div class="grid">
-    <div class="card">
-      <h3>LLC & Corporation Taxes</h3>
-      <p>Support for LLCs, S-Corps, C-Corps, partnerships, and sole proprietors.</p>
-    </div>
-
-    <div class="card">
-      <h3>Self-Employed Tax Returns</h3>
-      <p>Help for independent contractors, business owners, and professionals with complicated income.</p>
-    </div>
-
-    <div class="card">
-      <h3>IRS Representation</h3>
-      <p>As an Enrolled Agent, Alex can represent taxpayers before the IRS for audits, collections, and appeals.</p>
-    </div>
-
-    <div class="card">
-      <h3>Tax Planning</h3>
-      <p>Smarter planning so tax season does not feel like getting hit by a truck every year.</p>
-    </div>
+    <div class="card"><h3>LLC & Corporation Taxes</h3><p>Support for LLCs, S-Corps, C-Corps, partnerships, and sole proprietors.</p></div>
+    <div class="card"><h3>Self-Employed Tax Returns</h3><p>Help for independent contractors, business owners, and professionals with complicated income.</p></div>
+    <div class="card"><h3>IRS Representation</h3><p>As an Enrolled Agent, Alex can represent taxpayers before the IRS for audits, collections, and appeals.</p></div>
+    <div class="card"><h3>Tax Planning</h3><p>Smarter planning so tax season does not feel like getting hit by a truck every year.</p></div>
   </div>
 </section>
 
@@ -582,25 +485,10 @@
   </div>
 
   <div class="grid">
-    <div class="card">
-      <h3>QuickBooks Setup</h3>
-      <p>Start with the right accounts, categories, workflow, and structure.</p>
-    </div>
-
-    <div class="card">
-      <h3>QuickBooks Cleanup</h3>
-      <p>Fix messy books, incorrect categories, duplicate entries, and confusing reports.</p>
-    </div>
-
-    <div class="card">
-      <h3>Training</h3>
-      <p>Learn how to use QuickBooks without needing an accounting degree and a bottle of Advil.</p>
-    </div>
-
-    <div class="card">
-      <h3>Ongoing Support</h3>
-      <p>Keep your books updated, accurate, and useful throughout the year.</p>
-    </div>
+    <div class="card"><h3>QuickBooks Setup</h3><p>Start with the right accounts, categories, workflow, and structure.</p></div>
+    <div class="card"><h3>QuickBooks Cleanup</h3><p>Fix messy books, incorrect categories, duplicate entries, and confusing reports.</p></div>
+    <div class="card"><h3>Training</h3><p>Learn how to use QuickBooks without needing an accounting degree and a bottle of Advil.</p></div>
+    <div class="card"><h3>Ongoing Support</h3><p>Keep your books updated, accurate, and useful throughout the year.</p></div>
   </div>
 </section>
 
@@ -614,20 +502,9 @@
   </div>
 
   <div class="testimonials">
-    <div class="card quote">
-      “Alex reviewed past tax returns, found mistakes, and helped file an amended return that led to a substantial refund.”
-      <strong>Stacey O.</strong>
-    </div>
-
-    <div class="card quote">
-      “Mr. Blade found a $10,000 error on a tax return prepared by another firm and helped us receive a refund.”
-      <strong>Robert B.</strong>
-    </div>
-
-    <div class="card quote">
-      “Alex has allowed me to focus on growing my business instead of getting buried in paperwork.”
-      <strong>Client Review</strong>
-    </div>
+    <div class="card quote">“Alex reviewed past tax returns, found mistakes, and helped file an amended return that led to a substantial refund.”<strong>Stacey O.</strong></div>
+    <div class="card quote">“Mr. Blade found a $10,000 error on a tax return prepared by another firm and helped us receive a refund.”<strong>Robert B.</strong></div>
+    <div class="card quote">“Alex has allowed me to focus on growing my business instead of getting buried in paperwork.”<strong>Client Review</strong></div>
   </div>
 </section>
 
