@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Blade Firm | Jacksonville Accounting & Tax Help</title>
+  <title>The Blade Firm | Jacksonville Tax, Accounting & QuickBooks Experts</title>
+
   <style>
     :root {
-      --blue: #173f5f;
-      --dark: #102331;
-      --gold: #c99a3e;
-      --light: #f5f7fa;
+      --navy: #071827;
+      --blue: #0f3d5e;
+      --steel: #eef4f8;
+      --gold: #d7a84f;
       --white: #ffffff;
-      --text: #27313a;
+      --text: #26323f;
+      --muted: #6b7785;
+      --shadow: 0 24px 60px rgba(0,0,0,.16);
+      --radius: 22px;
     }
 
     * {
@@ -21,497 +25,665 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      line-height: 1.6;
       background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     header {
-      background: var(--dark);
-      color: var(--white);
-      padding: 18px 8%;
+      background: rgba(7,24,39,.96);
+      color: white;
+      padding: 18px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 800;
       letter-spacing: .5px;
     }
 
-    .logo span {
+    .brand span {
       color: var(--gold);
     }
 
     nav a {
-      color: var(--white);
-      text-decoration: none;
-      margin-left: 18px;
-      font-size: .95rem;
+      color: white;
+      margin-left: 20px;
+      font-size: .92rem;
+      opacity: .9;
+    }
+
+    nav a:hover {
+      color: var(--gold);
     }
 
     .hero {
-      background: linear-gradient(rgba(16,35,49,.82), rgba(16,35,49,.82)),
-      url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80');
+      min-height: 88vh;
+      background:
+        linear-gradient(115deg, rgba(7,24,39,.94) 0%, rgba(7,24,39,.88) 45%, rgba(15,61,94,.72) 100%),
+        url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=80");
       background-size: cover;
       background-position: center;
-      color: var(--white);
-      padding: 95px 8%;
-      text-align: center;
+      color: white;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 50px;
+      align-items: center;
+      padding: 90px 7%;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(215,168,79,.16);
+      color: var(--gold);
+      border: 1px solid rgba(215,168,79,.4);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: bold;
+      margin-bottom: 22px;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      margin-bottom: 18px;
+      font-size: clamp(2.6rem, 6vw, 5.6rem);
+      line-height: .98;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
     }
 
     .hero p {
-      max-width: 760px;
-      margin: 0 auto 28px;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
+      max-width: 690px;
+      color: #dce7ef;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-block;
-      background: var(--gold);
-      color: var(--dark);
-      padding: 14px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 6px;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: .2s ease;
     }
 
-    .btn.secondary {
-      background: transparent;
-      color: var(--white);
-      border: 2px solid var(--white);
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 14px 30px rgba(215,168,79,.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      color: white;
+      border: 1px solid rgba(255,255,255,.45);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,.96);
+      color: var(--text);
+      padding: 34px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      font-size: 1.6rem;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .hero-card li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e9ee;
+      font-weight: bold;
+    }
+
+    .hero-card li::before {
+      content: "✓";
+      color: var(--gold);
+      font-weight: bold;
+      margin-right: 10px;
     }
 
     section {
-      padding: 70px 8%;
+      padding: 82px 7%;
     }
 
-    .section-title {
+    .section-head {
+      max-width: 760px;
+      margin: 0 auto 45px;
       text-align: center;
-      margin-bottom: 35px;
     }
 
-    .section-title h2 {
-      color: var(--blue);
-      font-size: 2.2rem;
-      margin-bottom: 10px;
+    .section-head h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .light {
+      background: var(--steel);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
     }
 
     .card {
-      background: var(--white);
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 26px;
-      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: 0 16px 40px rgba(7,24,39,.08);
+      border: 1px solid rgba(7,24,39,.06);
     }
 
     .card h3 {
       color: var(--blue);
-      margin-bottom: 10px;
+      font-size: 1.28rem;
+      margin-bottom: 12px;
     }
 
-    .light {
-      background: var(--light);
+    .card p {
+      color: var(--muted);
     }
 
-    .about {
+    .split {
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 35px;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 50px;
       align-items: center;
     }
 
-    .badge {
-      background: var(--blue);
-      color: var(--white);
-      padding: 30px;
-      border-radius: 14px;
-      text-align: center;
+    .feature-box {
+      background: var(--navy);
+      color: white;
+      padding: 42px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
-    .badge h3 {
-      font-size: 2rem;
+    .feature-box h2 {
+      font-size: 2.4rem;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .feature-box p {
+      color: #d5e0e8;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,.08);
+      padding: 18px;
+      border-radius: 16px;
+    }
+
+    .stat strong {
       color: var(--gold);
-    }
-
-    ul {
-      margin-left: 20px;
-      margin-top: 10px;
-    }
-
-    .testimonial {
-      font-style: italic;
-    }
-
-    .testimonial strong {
       display: block;
-      margin-top: 12px;
+      font-size: 1.8rem;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .service-item {
+      background: white;
+      border-left: 5px solid var(--gold);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(7,24,39,.07);
+    }
+
+    .service-item h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .quote {
+      font-size: 1.02rem;
+      font-style: italic;
+      color: #354351;
+    }
+
+    .quote strong {
+      display: block;
+      margin-top: 18px;
       color: var(--blue);
       font-style: normal;
     }
 
     .cta {
-      background: var(--blue);
-      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(7,24,39,.96), rgba(15,61,94,.94)),
+        url("https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
       text-align: center;
+      padding: 90px 7%;
     }
 
     .cta h2 {
-      font-size: 2.4rem;
-      margin-bottom: 15px;
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
     }
 
-    .contact-box {
+    .cta p {
+      color: #dce7ef;
+      font-size: 1.2rem;
+      max-width: 740px;
+      margin: 0 auto 30px;
+    }
+
+    .contact-wrap {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: .85fr 1.15fr;
       gap: 30px;
     }
 
-    form input, form textarea {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
+    .contact-info {
+      background: var(--navy);
+      color: white;
+      padding: 36px;
+      border-radius: var(--radius);
     }
 
-    form button {
+    .contact-info h3 {
+      color: var(--gold);
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .contact-info p {
+      margin-bottom: 12px;
+      color: #dce7ef;
+    }
+
+    form {
+      background: white;
+      padding: 36px;
+      border-radius: var(--radius);
+      box-shadow: 0 16px 40px rgba(7,24,39,.08);
+    }
+
+    input, textarea, select {
       width: 100%;
+      padding: 15px;
+      border: 1px solid #d9e0e7;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    button {
       border: none;
       cursor: pointer;
+      width: 100%;
       font-size: 1rem;
     }
 
     footer {
-      background: var(--dark);
-      color: var(--white);
+      background: #04101b;
+      color: #ccd6df;
+      padding: 34px 7%;
       text-align: center;
-      padding: 30px 8%;
       font-size: .9rem;
     }
 
-    footer a {
-      color: var(--gold);
+    @media (max-width: 1050px) {
+      .hero,
+      .split,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .grid,
+      .testimonials {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 700px) {
       header {
         display: block;
         text-align: center;
       }
 
       nav {
-        margin-top: 12px;
+        margin-top: 14px;
       }
 
       nav a {
         display: inline-block;
-        margin: 6px;
+        margin: 6px 8px;
       }
 
-      .about,
-      .contact-box {
+      .grid,
+      .testimonials,
+      .stat-row {
         grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 60px;
       }
     }
   </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">The <span>Blade</span> Firm</div>
+  <div class="brand">The <span>Blade</span> Firm</div>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#taxes">Taxes</a>
     <a href="#quickbooks">QuickBooks</a>
-    <a href="#testimonials">Reviews</a>
+    <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<section class="hero" id="home">
-  <h1>Jacksonville Accounting, Tax & QuickBooks Help for Small Businesses</h1>
-  <p>
-    The Blade Firm helps Jacksonville small business owners, entrepreneurs, and individuals
-    stay organized, stay compliant, and stop losing time to accounting chaos.
-  </p>
-  <a href="tel:9043717802" class="btn">Call (904) 371-7802</a>
-  <a href="#contact" class="btn secondary">Schedule a Free Consultation</a>
+<section class="hero">
+  <div>
+    <div class="eyebrow">Jacksonville Tax • Accounting • QuickBooks</div>
+    <h1>Stop letting your books run your business.</h1>
+    <p>
+      The Blade Firm helps Jacksonville business owners clean up the numbers,
+      prepare smart tax returns, handle QuickBooks, and make accounting feel a whole lot less miserable.
+    </p>
+    <div class="hero-buttons">
+      <a href="tel:9043717802" class="btn btn-primary">Call (904) 371-7802</a>
+      <a href="#contact" class="btn btn-outline">Request a Consultation</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <h3>What We Help With</h3>
+    <ul>
+      <li>Small Business Accounting</li>
+      <li>Business & Individual Taxes</li>
+      <li>QuickBooks Setup & Cleanup</li>
+      <li>Business Formation</li>
+      <li>IRS Representation</li>
+    </ul>
+    <p><strong>Alex Blade, EA</strong><br>Federally licensed tax professional authorized to represent taxpayers before the IRS.</p>
+  </div>
 </section>
 
-<section>
-  <div class="section-title">
-    <h2>Accounting Help That Actually Helps</h2>
-    <p>Personal service, practical guidance, and attention to detail for businesses with real-world needs.</p>
+<section id="services">
+  <div class="section-head">
+    <h2>Accounting help built for actual small business owners.</h2>
+    <p>
+      You do not need more accounting jargon. You need clean books, clear answers,
+      and someone who knows what they are doing when tax season shows up.
+    </p>
   </div>
 
   <div class="grid">
     <div class="card">
       <h3>Small Business Accounting</h3>
-      <p>Bookkeeping, payroll support, organized records, financial cleanup, and day-to-day accounting help.</p>
+      <p>Bookkeeping, payroll support, financial organization, records cleanup, and practical reporting.</p>
     </div>
+
     <div class="card">
       <h3>Business Taxes</h3>
-      <p>Tax preparation and planning for sole proprietors, LLCs, S-Corps, C-Corps, and growing businesses.</p>
-    </div>
-    <div class="card">
-      <h3>QuickBooks Help</h3>
-      <p>QuickBooks setup, training, troubleshooting, software migration, cleanup, and ongoing management.</p>
-    </div>
-    <div class="card">
-      <h3>Business Formation</h3>
-      <p>Guidance on choosing the right structure, including LLCs, corporations, partnerships, and sole proprietorships.</p>
-    </div>
-  </div>
-</section>
-
-<section class="light" id="about">
-  <div class="about">
-    <div class="badge">
-      <h3>EA</h3>
-      <p>Enrolled Agent</p>
-      <p>Federally Licensed in Taxation</p>
-      <p>Authorized by the Department of Treasury</p>
-    </div>
-
-    <div>
-      <h2>Meet Alex Blade</h2>
-      <p>
-        Alex Blade, owner of The Blade Firm, works with small and mid-sized businesses throughout Jacksonville.
-        As an Enrolled Agent and QuickBooks ProAdvisor, Alex helps clients with business taxes, payroll,
-        bookkeeping, accounting systems, tax issues, and QuickBooks training.
-      </p>
-      <p>
-        The firm serves a wide range of industries including restaurants, construction, landscaping,
-        property management, real estate, insurance, retail, technology, marketing, and more.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section id="services">
-  <div class="section-title">
-    <h2>Business Accounting Services</h2>
-    <p>For business owners who would rather run the business than wrestle with receipts and spreadsheets.</p>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Bookkeeping & Records</h3>
-      <p>
-        Clean, organized books help business owners make better decisions. The Blade Firm can turn piles of
-        receipts, spreadsheets, and old records into usable financial information.
-      </p>
-    </div>
-    <div class="card">
-      <h3>Affordable Accounting Support</h3>
-      <p>
-        Many small businesses do not need a full-time in-house accountant. The Blade Firm gives them access
-        to professional accounting help without the cost of adding another employee.
-      </p>
-    </div>
-    <div class="card">
-      <h3>Payroll & Business Support</h3>
-      <p>
-        From payroll questions to routine accounting needs, the firm helps business owners simplify the
-        financial side of running a company.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="light" id="formation">
-  <div class="section-title">
-    <h2>Business Formation</h2>
-    <p>Start with the right structure before the paperwork becomes a problem.</p>
-  </div>
-
-  <div class="card">
-    <p>
-      Choosing the right business structure is one of the most important decisions a new business owner can make.
-      The Blade Firm helps clients understand the tax advantages and legal considerations of:
-    </p>
-    <ul>
-      <li>S Corporation</li>
-      <li>C Corporation</li>
-      <li>Limited Liability Company, or LLC</li>
-      <li>Sole Proprietorship</li>
-      <li>Partnership</li>
-    </ul>
-    <p>
-      The firm helps Jacksonville entrepreneurs choose the best option for their needs and long-term business goals.
-    </p>
-  </div>
-</section>
-
-<section id="taxes">
-  <div class="section-title">
-    <h2>Tax Preparation & Planning</h2>
-    <p>Business and individual tax help without the panic.</p>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Business Taxes</h3>
-      <p>
-        Business taxes are more complicated than personal returns. The Blade Firm helps sole proprietors,
-        LLCs, S-Corps, C-Corps, and larger organizations stay compliant and organized at tax time.
-      </p>
+      <p>Tax preparation and planning for LLCs, S-Corps, C-Corps, sole proprietors, and partnerships.</p>
     </div>
 
     <div class="card">
       <h3>Individual Taxes</h3>
-      <p>
-        Tax laws can be confusing and time-consuming. The firm prepares individual tax returns for Jacksonville
-        residents, including those with self-employment income, rental property income, and farm income.
-      </p>
+      <p>Tax returns for individuals, self-employed professionals, rental property owners, and more.</p>
     </div>
 
     <div class="card">
-      <h3>Tax Problem Support</h3>
+      <h3>Business Formation</h3>
+      <p>Guidance on choosing the right structure before the paperwork becomes a problem.</p>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="split">
+    <div class="feature-box">
+      <h2>Meet Alex Blade</h2>
       <p>
-        As an Enrolled Agent, Alex Blade is federally authorized to represent taxpayers before the IRS for
-        collections, audits, and appeals.
+        Alex Blade is the owner of The Blade Firm, an Enrolled Agent, and a QuickBooks ProAdvisor
+        serving small and mid-sized businesses throughout Jacksonville.
       </p>
+
+      <div class="stat-row">
+        <div class="stat">
+          <strong>EA</strong>
+          IRS Representation
+        </div>
+        <div class="stat">
+          <strong>QB</strong>
+          QuickBooks Help
+        </div>
+        <div class="stat">
+          <strong>JAX</strong>
+          Local Business Focus
+        </div>
+      </div>
+    </div>
+
+    <div class="service-list">
+      <div class="service-item">
+        <h3>For business owners who are tired of guessing</h3>
+        <p>The Blade Firm helps turn receipts, reports, payroll, and taxes into something understandable.</p>
+      </div>
+
+      <div class="service-item">
+        <h3>For companies that need real accounting help</h3>
+        <p>Restaurants, contractors, property managers, real estate, retail, technology, marketing, and more.</p>
+      </div>
+
+      <div class="service-item">
+        <h3>For people who want tax season to stop being a disaster</h3>
+        <p>Better records, better planning, and fewer last-minute surprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="taxes">
+  <div class="section-head">
+    <h2>Business taxes. Individual taxes. IRS problems. Handled.</h2>
+    <p>
+      Whether you own a business, work for yourself, have rental income,
+      or just need your return done correctly, The Blade Firm can help.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>LLC & Corporation Taxes</h3>
+      <p>Support for LLCs, S-Corps, C-Corps, partnerships, and sole proprietors.</p>
+    </div>
+
+    <div class="card">
+      <h3>Self-Employed Tax Returns</h3>
+      <p>Help for independent contractors, business owners, and professionals with complicated income.</p>
+    </div>
+
+    <div class="card">
+      <h3>IRS Representation</h3>
+      <p>As an Enrolled Agent, Alex can represent taxpayers before the IRS for audits, collections, and appeals.</p>
+    </div>
+
+    <div class="card">
+      <h3>Tax Planning</h3>
+      <p>Smarter planning so tax season does not feel like getting hit by a truck every year.</p>
     </div>
   </div>
 </section>
 
 <section class="light" id="quickbooks">
-  <div class="section-title">
-    <h2>QuickBooks Help & Management</h2>
-    <p>Setup, cleanup, training, upgrades, and ongoing support.</p>
-  </div>
-
-  <div class="card">
+  <div class="section-head">
+    <h2>QuickBooks should make life easier. Not make you want to throw your laptop.</h2>
     <p>
-      QuickBooks is one of the most widely used accounting platforms for small businesses. The Blade Firm helps
-      Jacksonville businesses with purchasing, installation, setup, training, ongoing management, upgrades,
-      software migration, and troubleshooting.
+      The Blade Firm helps with QuickBooks setup, training, cleanup, migration,
+      upgrades, troubleshooting, and ongoing management.
     </p>
-    <p>
-      If a business owner is struggling to understand QuickBooks or moving from another platform, The Blade Firm
-      can help make the process easier.
-    </p>
-  </div>
-</section>
-
-<section id="testimonials">
-  <div class="section-title">
-    <h2>Client Testimonials</h2>
-    <p>Real results from clients who trusted The Blade Firm with their taxes and accounting.</p>
   </div>
 
   <div class="grid">
-    <div class="card testimonial">
-      “Alex Blade sets the gold standard. He reviewed past tax returns, found mistakes, and helped file an amended return that led to a substantial refund.”
+    <div class="card">
+      <h3>QuickBooks Setup</h3>
+      <p>Start with the right accounts, categories, workflow, and structure.</p>
+    </div>
+
+    <div class="card">
+      <h3>QuickBooks Cleanup</h3>
+      <p>Fix messy books, incorrect categories, duplicate entries, and confusing reports.</p>
+    </div>
+
+    <div class="card">
+      <h3>Training</h3>
+      <p>Learn how to use QuickBooks without needing an accounting degree and a bottle of Advil.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ongoing Support</h3>
+      <p>Keep your books updated, accurate, and useful throughout the year.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="section-head">
+    <h2>Clients trust The Blade Firm because the details matter.</h2>
+    <p>
+      From corrected returns to business formation, clients rely on The Blade Firm
+      for accuracy, service, and practical guidance.
+    </p>
+  </div>
+
+  <div class="testimonials">
+    <div class="card quote">
+      “Alex reviewed past tax returns, found mistakes, and helped file an amended return that led to a substantial refund.”
       <strong>Stacey O.</strong>
     </div>
 
-    <div class="card testimonial">
-      “Mr. Blade found a $10,000 error on a tax return prepared by another firm and helped us receive a refund of more than $3,000.”
+    <div class="card quote">
+      “Mr. Blade found a $10,000 error on a tax return prepared by another firm and helped us receive a refund.”
       <strong>Robert B.</strong>
     </div>
 
-    <div class="card testimonial">
+    <div class="card quote">
       “Alex has allowed me to focus on growing my business instead of getting buried in paperwork.”
-      <strong>Anonymous Intuit Review</strong>
-    </div>
-
-    <div class="card testimonial">
-      “When I was ready to open my LLC, he made the process easy to understand and handled the paperwork.”
-      <strong>Rachel K.</strong>
-    </div>
-
-    <div class="card testimonial">
-      “Attentive service, timely responses, and excellent work. I wouldn’t choose anyone else.”
-      <strong>Becky H.</strong>
+      <strong>Client Review</strong>
     </div>
   </div>
 </section>
 
 <section class="cta">
-  <h2>Ready to Make Accounting Less Painful?</h2>
-  <p>Call today for a free consultation and see how The Blade Firm can help your business.</p>
-  <a href="tel:9043717802" class="btn">Call (904) 371-7802</a>
+  <h2>Your business deserves better than accounting chaos.</h2>
+  <p>
+    Schedule a consultation with The Blade Firm and get your taxes,
+    books, and QuickBooks handled by someone who knows what they’re doing.
+  </p>
+  <a href="tel:9043717802" class="btn btn-primary">Call Now: (904) 371-7802</a>
 </section>
 
 <section id="contact">
-  <div class="section-title">
+  <div class="section-head">
     <h2>Contact The Blade Firm</h2>
-    <p>Available Monday through Friday, 9am to 5pm.</p>
+    <p>Located in Jacksonville and serving small businesses, individuals, and entrepreneurs.</p>
   </div>
 
-  <div class="contact-box">
-    <div class="card">
+  <div class="contact-wrap">
+    <div class="contact-info">
       <h3>Office Information</h3>
       <p><strong>The Blade Firm</strong></p>
-      <p>Alex Blade</p>
       <p>3491 Pall Mall Drive, Suite 114</p>
       <p>Jacksonville, FL 32257</p>
       <br>
-      <p><strong>Office:</strong> (904) 371-7802</p>
+      <p><strong>Phone:</strong> (904) 371-7802</p>
       <p><strong>Fax:</strong> (904) 239-5400</p>
       <p><strong>Email:</strong> alex@thebladefirm.com</p>
+      <br>
+      <p><strong>Hours:</strong><br>Monday - Friday<br>9:00 AM - 5:00 PM</p>
     </div>
 
-    <form class="card">
-      <h3>Request More Information</h3>
+    <form>
       <input type="text" placeholder="First & Last Name *" required>
       <input type="email" placeholder="Email Address *" required>
       <input type="tel" placeholder="Best Contact Number *" required>
-      <input type="text" placeholder="Business Name">
-      <textarea rows="6" placeholder="Your Message"></textarea>
-      <button class="btn" type="submit">Submit Request</button>
+      <select>
+        <option>What do you need help with?</option>
+        <option>Business Accounting</option>
+        <option>Business Taxes</option>
+        <option>Individual Taxes</option>
+        <option>QuickBooks</option>
+        <option>Business Formation</option>
+        <option>IRS Issue</option>
+      </select>
+      <textarea rows="6" placeholder="Tell us what is going on..."></textarea>
+      <button class="btn btn-primary" type="submit">Request a Consultation</button>
     </form>
   </div>
 </section>
 
-<section class="light" id="privacy">
-  <div class="section-title">
-    <h2>Privacy & Terms Summary</h2>
-  </div>
-
-  <div class="card">
-    <p>
-      The Blade Firm respects visitor privacy and uses submitted information to respond to requests,
-      improve the website experience, and provide information about services. Visitors should not use
-      the website in a way that violates law, damages the site, copies protected materials without permission,
-      or interferes with other users. Website content, names, logos, and service marks belong to The Blade Firm, Inc.
-    </p>
-    <p>
-      This demo includes a shortened privacy and terms section. A final live version should include the full legal
-      Privacy Policy and Terms of Use reviewed and approved by the business.
-    </p>
-  </div>
-</section>
-
 <footer>
-  <p>The Blade Firm | 3491 Pall Mall Drive, Suite 114, Jacksonville, FL 32257</p>
+  <p>The Blade Firm | Jacksonville, FL 32257</p>
   <p>(904) 371-7802 | alex@thebladefirm.com</p>
-  <p>EA — Enrolled Agent | Federally Licensed in Taxation | Authorized by the Department of Treasury</p>
-  <p>Copyright © 2026 The Blade Firm, Inc. All Rights Reserved.</p>
+  <p>Enrolled Agent | QuickBooks ProAdvisor | Tax & Accounting Services</p>
+  <p>© 2026 The Blade Firm, Inc. All Rights Reserved.</p>
 </footer>
 
 </body>
